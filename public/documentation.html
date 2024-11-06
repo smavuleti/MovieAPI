@@ -1,17 +1,216 @@
 <!DOCTYPE html>
-<html lang="en">
 
 <head>
+    <style> 
+        th {
+            font-weight: bold;
+            text-align: left;
+            border: 1px solid saddlebrown;
+            padding:10px;
+
+        }
+
+        td {
+            padding: 20px;
+            background-color: blanchedalmond;
+        }
+    
+        pre{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Application API</title>
 </head>
 
-<body>
+<body style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
     <h3> Movie API Documentation Page</h3>
-    <h5> This documentation provides basic instructions outlining the functionality of the Movie Application.
-    </h5>
+    <h5> Following are the the URL endpoints and the corresponding request methods associated with the key features of the Movie Application.</h5>
+<table>
+        <tr> 
+            <th> Request </th>
+            <th> URL </th>
+            <th> HTTP Method </th>
+            <th> Query Parameters</th>
+            <th> Request Body Data Format</th>
+            <th> Response Body Data Format</th>
+        </tr>
+        <tr> 
+            <td> Get a list of movies </td>
+            <td> /allMovies </td>
+            <td> GET </td>
+            <td> None </td>
+            <td> None </td>
+            <td>A JSON object holding data about all the movies 
+                <pre> 
+                Structured like:
+                {
+                    movieId: '01',
+                    movieTitle: 'The Godfather',
+                    movieGenres: ['Epic', 'Gangster', 'Tragedy', 'Crime', 'Drama'],
+                    movieDirector:
+                    {
+                        firstName: 'Francis Ford',
+                        lastName: 'Coppola',
+                        birthYear: '1939',
+                        birthPlace: 'USA',
+                        deathYear: '1986'
+            
+                    }
+                }
+            </pre>
+            </td>
+         </tr>
 
+         <tr> 
+            <td> Get a single movie data by movie title</td>
+            <td> /allMovies/:movieTitle </td>
+            <td> GET </td>
+            <td> movieTitle </td>
+            <td> None </td>
+            <td>A JSON object holding data about a single movies 
+                <pre> 
+                Output:
+                {
+                    movieId: '04',
+                    movieTitle: 'Jaws',
+                    movieGenres: ['Sea Adventure', 'Survival', 'Adventure', 'Drama', 'Thriller'],
+                    movieDirector:
+                    {
+                        firstName: 'Steven',
+                        lastName: 'Spielberg',
+                        birthYear: '1946',
+                        birthPlace: 'USA',
+                        deathYear: null
+                    }
+                }
+            </pre>
+            </td>
+         </tr>
+         
+         <tr> 
+            <td> Get movie genres by title</td>
+            <td> /allMovies/:movieGenre </td>
+            <td> GET </td>
+            <td> movieGenre </td>
+            <td> None </td>
+            <td>A JSON object holding data about a movie genres
+                <pre> 
+                Output:
+                {
+                    'Sea Adventure', 
+                    'Survival', 
+                    'Adventure', 
+                    'Drama', 
+                    'Thriller'
+                }
+            </pre>
+            </td>
+         </tr>
+
+         <tr> 
+            <td> Get movie director data by title</td>
+            <td> /allMovies/:movieDirector </td>
+            <td> GET </td>
+            <td> movieDirector </td>
+            <td> None </td>
+            <td>A JSON object holding data about a movie director
+                <pre> 
+                Output:
+                movieDirector:
+                {
+                    firstName: 'James',
+                    lastName: 'Wan',
+                    birthYear: '1977',
+                    birthPlace: 'Malaysia',
+                    deathYear: null
+                }
+            </pre>
+            </td>
+         </tr>
+
+         <tr> 
+            <td> Register a new user </td>
+            <td> /user </td>
+            <td> POST </td>
+            <td> username </td>
+            <td> None </td>
+            <td>A JSON object holding data a user data 
+                <pre> 
+                Structured like:
+                {
+                    username: 'John',
+                    password: 'John@123',
+                    email: 'John.Camell@gmail.com',
+                    dateOfBirth: '07/08/1990',
+                    favoriteMovies: ['Jurassic Park]
+                }
+            </pre>
+            </td>
+         </tr>
+
+         <tr> 
+            <td> Update user information </td>
+            <td> /user/:userName </td>
+            <td> PUT </td>
+            <td> userName </td>
+            <td>A JSON object holding updated user data (userName)
+                <pre> 
+                {
+                    username: 'John',
+                    password: 'John@123',
+                    email: 'John.Camell@gmail.com',
+                    dateOfBirth: '07/08/1990',
+                    favoriteMovies: ['Jurassic Park']
+                }
+            </pre>
+            </td>
+            <td> Success or Failure Message </td>
+         </tr>
+
+         <tr> 
+            <td> Add a movie to user favorite list </td>
+            <td> /user/:userName/:favoriteMovies </td>
+            <td> POST </td>
+            <td> userName and movieTitle </td>
+            <td>A JSON object holding a movie title
+                <pre> 
+                {
+                    username: 'John',
+                    password: 'John@123',
+                    email: 'John.Camell@gmail.com',
+                    dateOfBirth: '07/08/1990',
+                    favoriteMovies: ['Jurassic Park']
+                }
+            </pre>
+            </td>
+            <td>A JSON object holding user updated favorite movies list
+                <pre> 
+                {
+                    favoriteMovies: ['Jurassic Park','Jaws']
+                }
+            </pre>
+            </td>
+         </tr>
+
+         <tr> 
+            <td> Delete a movie to user favorite list </td>
+            <td> /user/:userName/:favoriteMovies </td>
+            <td> DELETE </td>
+            <td> userName and movieTitle </td>
+            <td> None </td>
+            <td> A text message or updated favorite list</td>
+         </tr>
+
+         <tr> 
+            <td> Deregistering a user  </td>
+            <td> /user/:userName </td>
+            <td> DELETE </td>
+            <td> userName </td>
+            <td> None </td>
+            <td> Confirmation or Error Message </td>
+         </tr>
+</table>
 </body>
-
 </html>
